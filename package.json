@@ -1,0 +1,25 @@
+{
+  "scripts": {
+    "type-check": "npx tsc --noEmit -p ./tsconfig.app.json",
+    "build": "vite build --outDir dist",
+    "serve": "vite",
+    "lint": ""
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.38",
+    "prettier": "^2.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwindcss": "^3.4.14",
+    "typescript": "~5.4.2",
+    "vite": "^5.0.0"
+  }
+}

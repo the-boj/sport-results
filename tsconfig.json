@@ -1,0 +1,34 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "module": "es2022",
+        "allowJs": false,
+        "esModuleInterop": false,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "rootDir": ".",
+        "noUnusedLocals": true,
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2018",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["es2017", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": "."
+    },
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        }
+    ],
+    "ts-node": {
+        "swc": true
+    },
+    "exclude": ["node_modules", "tmp"]
+}
