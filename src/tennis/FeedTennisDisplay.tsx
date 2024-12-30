@@ -1,5 +1,6 @@
 import { Thumb } from '../utils/thumb';
 import { FeedSportIncomingDisplay } from '../listing/FeedSportIncomingDisplay';
+import { ItemLiveTennis, TennisSet } from '../types/api';
 
 interface RowProps {
     domicileValue: string;

@@ -1,3 +1,5 @@
+import { ItemLiveAllo } from "../types/api";
+
 interface Props {
     alloItem: ItemLiveAllo;
 }

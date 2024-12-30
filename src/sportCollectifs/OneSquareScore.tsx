@@ -1,3 +1,4 @@
+import { ItemLiveSportCollectif } from '../types/api';
 import { Thumb } from '../utils/thumb';
 
 interface RowProps {

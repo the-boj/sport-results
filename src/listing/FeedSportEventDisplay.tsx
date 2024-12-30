@@ -1,3 +1,4 @@
+import { ItemLiveSportEvent, Sport } from "../types/api";
 import { FeedAlloDisplay } from "../allo/FeedAlloDisplay";
 import { FeedCourseDisplay } from "../course/FeedCourseDisplay";
 import { FeedSportCollectifDisplay } from "../sportCollectifs/FeedSportCollectifDisplay";

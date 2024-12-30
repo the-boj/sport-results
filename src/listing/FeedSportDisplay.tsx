@@ -1,3 +1,4 @@
+import { ItemLiveSport, Sport } from '../types/api';
 import { FeedCompetitionDisplay } from './FeedCompetitionDisplay';
 
 interface Props {
