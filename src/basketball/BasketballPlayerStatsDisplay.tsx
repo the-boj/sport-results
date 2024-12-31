@@ -25,7 +25,7 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
                 {playersStats.items.map((item) => (
                     <div key={`TEAM-${item.items[0].team.nom}`} className="mb-3 gap-1">
                         {item.items.length ? (
-                            <div className="text-xl font-bold">{item.items[0].team.nom}</div>
+                            <div className="text-xl font-bold mb-1">{item.items[0].team.nom}</div>
                         ) : (
                             <div />
                         )}
