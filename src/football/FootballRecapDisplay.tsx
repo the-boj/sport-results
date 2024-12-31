@@ -12,7 +12,7 @@ function DomicileEvent({ event }: { event: FootballEvent }) {
                 <div className="w-[20px] h-[20px] bg-yellow-300" />
             )}
             <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
-            <div>{event.joueur.nom_abrege}</div>
+            <div className='whitespace-nowrap overflow-hidden text-ellipsis'>{event.joueur.nom_abrege}</div>
         </div>
     );
 }
@@ -26,7 +26,7 @@ function ExterieurEvent({ event }: { event: FootballEvent }) {
                 <div className="w-[20px] h-[20px] bg-yellow-300" />
             )}
             <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
-            <div>{event.joueur.nom_abrege}</div>
+            <div className='whitespace-nowrap overflow-hidden text-ellipsis'>{event.joueur.nom_abrege}</div>
         </div>
     );
 }
