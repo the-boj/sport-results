@@ -11,7 +11,7 @@ function DomicileEvent({ event }: { event: FootballEvent }) {
             ) : (
                 <div className="w-[20px] h-[20px] bg-yellow-300" />
             )}
-            <div className='ml-[5px] mr-[5px]'>{event.instant.date}'</div>
+            <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
             <div>{event.joueur.nom_abrege}</div>
         </div>
     );
@@ -20,10 +20,10 @@ function DomicileEvent({ event }: { event: FootballEvent }) {
 function ExterieurEvent({ event }: { event: FootballEvent }) {
     return (
         <div className="flex flex-row items-center pl-[52%]">
-        {event.group === 'but' ? (
-            <div className="w-[20px] h-[20px] rounded-[50%] bg-green-600" />
-        ) : (
-            <div className="w-[20px] h-[20px] bg-yellow-300" />
+            {event.group === 'but' ? (
+                <div className="w-[20px] h-[20px] rounded-[50%] bg-green-600" />
+            ) : (
+                <div className="w-[20px] h-[20px] bg-yellow-300" />
             )}
             <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
             <div>{event.joueur.nom_abrege}</div>
@@ -98,6 +98,11 @@ function FootballRecapDisplay({ recapData }: Props) {
                         text={recapData.specifics.score.domicile}
                         weight={winner === 'domicile' ? 'bold' : 'normal'}
                     />
+                    <img
+                        src={recapData.specifics.domicile.equipe.url_image}
+                        alt="logo"
+                        className="mt-1 w-[40px] h-[40px]"
+                    />
                     <TeamDisplay
                         text={recapData.specifics.domicile.equipe.nom}
                         weight={winner === 'domicile' ? 'bold' : 'normal'}
@@ -107,6 +112,11 @@ function FootballRecapDisplay({ recapData }: Props) {
                     <ScoreDisplay
                         text={recapData.specifics.score.exterieur}
                         weight={winner === 'exterieur' ? 'bold' : 'normal'}
+                    />
+                    <img
+                        src={recapData.specifics.exterieur.equipe.url_image}
+                        alt="logo"
+                        className="mt-1 w-[40px] h-[40px]"
                     />
                     <TeamDisplay
                         text={recapData.specifics.exterieur.equipe.nom}
