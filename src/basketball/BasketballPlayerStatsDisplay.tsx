@@ -7,7 +7,7 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
     return (
         <div className="flex flex-col p-[20px] pt-[10px] overflow-scroll">
             {playersStats.items?.[0]?.items?.[0] && (
-                <div className="flex">
+                <div className="flex w-[1700px]">
                     <div className="w-[180px] text-lg font-bold">Joueur</div>
                     {playersStats.items[0].items[0].items.map((stat) => {
                         if (stat.label === 'tit.') {
@@ -15,7 +15,7 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
                         }
                         return (
                             <div key={`LABEL-${stat.label}`} className="w-[100px] text-center text-lg font-bold">
-                                {stat.label === "balles perdues" ? "PB" : stat.label}
+                                {stat.label === "balles perdues" ? "pb" : stat.label}
                             </div>
                         );
                     })}
@@ -30,7 +30,7 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
                             <div />
                         )}
                         {item.items.map((player, i) => (
-                            <div key={`PLAYER-${player.player.nom_abrege}`} className="flex border-b-2 border-gray-300">
+                            <div key={`PLAYER-${player.player.nom_abrege}`} className="flex w-[1700px] border-b-2 border-gray-300">
                                 <div className="w-[180px]">{player.player.nom_abrege}</div>
                                 {player.items.map((stat) => {
                                     if (stat.label === 'tit.') {
