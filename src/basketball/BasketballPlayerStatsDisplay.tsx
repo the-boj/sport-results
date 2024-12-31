@@ -8,14 +8,14 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
         <div className="flex flex-col p-[20px] pt-[10px] overflow-scroll">
             {playersStats.items?.[0]?.items?.[0] && (
                 <div className="flex">
-                    <div className="w-[180px]">Joueur</div>
+                    <div className="w-[180px] text-lg font-bold">Joueur</div>
                     {playersStats.items[0].items[0].items.map((stat) => {
                         if (stat.label === 'tit.') {
                             return <div key={`LABEL-TIT`} />;
                         }
                         return (
                             <div key={`LABEL-${stat.label}`} className="w-[100px] text-center text-lg font-bold">
-                                {stat.label}
+                                {stat.label === "balles perdues" ? "PB" : stat.label}
                             </div>
                         );
                     })}

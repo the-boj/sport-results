@@ -39,7 +39,7 @@ function Basketball() {
         return <div>No data</div>;
     }
     return (
-        <div className="flex flex-col h-[100vh]">
+        <div className="flex flex-col h-[100vh] max-w-[100wh]">
             <div className="flex justify-between items-center">
                 <Link to="/">
                     <div className="text-md p-2 w-[100px]">{'< Retour'}</div>
