@@ -1,7 +1,7 @@
 {
   "scripts": {
     "type-check": "npx tsc --noEmit -p ./tsconfig.app.json",
-    "build": "vite build --outDir dist && workbox generateSW workbox-config.js && cp -r assets dist/assets && cp -r manifest.json dist/manifest.json && cp -r robots.txt dist/robots.txt",
+    "build": "vite build --outDir dist && workbox generateSW workbox-config.js && cp -r assets dist/ && cp -r manifest.json dist/manifest.json && cp -r robots.txt dist/robots.txt",
     "serve": "vite",
     "lint": ""
   },
