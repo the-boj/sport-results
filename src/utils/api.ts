@@ -2,6 +2,8 @@ import { ApiResponse } from '../types/api';
 import { FootballRecap } from '../types/football/recap';
 import { FootballFlux } from '../types/football/flux';
 import { formatDateToString } from '../utils/utils';
+import { BasketballLeaderboard } from '../types/basketball/leaderboard';
+import { BasketballPlayerStats } from '../types/basketball/playerStats';
 
 const baseUrl = "https://dwh.lequipe.fr/api/live/lives?date=--date--&platform=desktop&version=1.0"
 
@@ -35,4 +37,25 @@ export async function requestFootballFlux(matchId: string) {
     const res = await fetch(url)
 
     return res.json() as Promise<FootballFlux>
+}
+
+/*****
+ * Basketball
+ */
+
+const basketballLeaderboardUrl = `https://dwh.lequipe.fr/api/live/lives/leaderboard?path=--path--&platform=mobile&version=1.0`
+const basketballPlayerStatsUrl = `https://dwh.lequipe.fr/api/live/lives/player-stats?path=--path--&platform=mobile&version=1.0`
+
+export async function requestBasketballLeaderboard(path: string) {
+    const url = basketballLeaderboardUrl.replace("--path--", path)
+    const res = await fetch(url)
+
+    return res.json() as Promise<BasketballLeaderboard>
+}
+
+export async function requestBasketballPlayerStats(path: string) {
+    const url = basketballPlayerStatsUrl.replace("--path--", path)
+    const res = await fetch(url)
+
+    return res.json() as Promise<BasketballPlayerStats>
 }

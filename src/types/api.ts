@@ -112,6 +112,7 @@ export interface ItemLiveSportCollectif {
     __type: 'rencontre_sport_collectif';
     date: string;
     id: string;
+    lien: string;
     statut: Statut;
     specifics: SpecificsSportCollectif;
 }

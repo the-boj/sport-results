@@ -29,7 +29,14 @@ function FeedSportCollectifDisplay({ sportCollectifItem, sport }: Props) {
             </Link>
         );
     }
-    if (['Rugby', 'Basket'].includes(sport)) {
+    if (sport === 'Basket') {
+        return (
+            <Link to={"/basketball"} state={{ path: sportCollectifItem.lien.replace("https://www.lequipe.fr", "") }}>
+                <OneSquareScore sportCollectifItem={sportCollectifItem} />
+            </Link>
+        );
+    }
+    if (sport === 'Rugby') {
         return <OneSquareScore sportCollectifItem={sportCollectifItem} />;
     }
     return <div>Unknown sport {sport}</div>;
