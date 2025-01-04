@@ -13,6 +13,13 @@ function BasketballPlayerStatsDisplay({ playersStats }: Props) {
                         if (stat.label === 'tit.') {
                             return <div key={`LABEL-TIT`} />;
                         }
+                        if (stat.label === 'pass. déc.') {
+                            return (
+                                <div key={`VALUE-${stat.label}`} className="w-[100px] text-center text-lg font-bold">
+                                    pass. d
+                                </div>
+                            );
+                        }
                         return (
                             <div key={`LABEL-${stat.label}`} className="w-[100px] text-center text-lg font-bold">
                                 {stat.label === "balles perdues" ? "pb" : stat.label}

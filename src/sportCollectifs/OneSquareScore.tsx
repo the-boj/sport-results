@@ -75,7 +75,8 @@ function OneSquareScore({ sportCollectifItem }: Props) {
                         winner={winner}
                     />
                     <div className="flex items-center">
-                        {['encours', 'termine'].includes(statut.type) && <span className="font-semibold">{statut.libelle}</span>}
+                        {statut.type === 'encours' && <span className="font-semibold text-red-600">{statut.libelle}</span>}
+                        {statut.type === 'termine' && <span className="font-semibold">{statut.libelle}</span>}
                         <ScoreColumDisplay
                             key={'SCERD-2'}
                             domicileValue={score?.domicile}

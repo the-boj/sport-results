@@ -25,9 +25,8 @@ function BasketballLeaderboardDisplay({ leaderboardData }: Props) {
 
     const winner = useMemo(() => {
         if (leaderboard.status.type === 'termine') {
-            return leaderboard.sport_event.specifics.score.domicile > leaderboard.sport_event.specifics.score.exterieur
-                ? 'domicile'
-                : 'exterieur';
+            const { domicile, exterieur } = leaderboard.sport_event.specifics.score;
+            return Number(domicile) > Number(exterieur) ? 'domicile' : 'exterieur';
         }
         return undefined;
     }, [leaderboardData]);
@@ -68,7 +67,10 @@ function BasketballLeaderboardDisplay({ leaderboardData }: Props) {
             </div>
             <div className="flex flex-col w-[50%] mt-2">
                 {leaderboard.sport_event.specifics.details_score.map((qt, i) => (
-                    <div key={`QT-${i}`} className="flex items-center justify-between w-full border-b-2 border-black pl-2 pr-2">
+                    <div
+                        key={`QT-${i}`}
+                        className="flex items-center justify-between w-full border-b-2 border-black pl-2 pr-2"
+                    >
                         <div
                             className="w-[30px] text-xl"
                             style={{ fontWeight: qt.domicile > qt.exterieur ? 'bold' : '' }}
