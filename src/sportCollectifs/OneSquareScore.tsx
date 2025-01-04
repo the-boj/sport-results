@@ -1,3 +1,4 @@
+import { ItemLiveSportCollectif } from '../types/api';
 import { Thumb } from '../utils/thumb';
 
 interface RowProps {
@@ -33,7 +34,7 @@ function ScoreColumDisplay({ domicileValue, exterieurValue, winner }: ScoreRowPr
             <span
                 style={{
                     fontWeight: winner === 'domicile' ? 'bold' : 'normal',
-                    backgroundColor: winner === 'domicile' ? 'black' : 'grey',
+                    backgroundColor: !winner ? 'red' : winner === 'domicile' ? 'black' : 'grey',
                 }}
                 className="text-center text-white w-[45px] p-1 m-[1px]"
             >
@@ -42,7 +43,7 @@ function ScoreColumDisplay({ domicileValue, exterieurValue, winner }: ScoreRowPr
             <span
                 style={{
                     fontWeight: winner === 'exterieur' ? 'bold' : 'normal',
-                    backgroundColor: winner === 'exterieur' ? 'black' : 'grey',
+                    backgroundColor: !winner ? 'red' : winner === 'exterieur' ? 'black' : 'grey',
                 }}
                 className="text-center text-white w-[45px] p-1"
             >
@@ -74,7 +75,8 @@ function OneSquareScore({ sportCollectifItem }: Props) {
                         winner={winner}
                     />
                     <div className="flex items-center">
-                        {['encours', 'termine'].includes(statut.type) && <span className="font-semibold">{statut.libelle}</span>}
+                        {statut.type === 'encours' && <span className="font-semibold text-red-600">{statut.libelle}</span>}
+                        {statut.type === 'termine' && <span className="font-semibold">{statut.libelle}</span>}
                         <ScoreColumDisplay
                             key={'SCERD-2'}
                             domicileValue={score?.domicile}

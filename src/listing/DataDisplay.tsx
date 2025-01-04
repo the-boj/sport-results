@@ -1,3 +1,4 @@
+import { Data } from '../types/api';
 import { FeedSportDisplay } from './FeedSportDisplay';
 
 interface Props {

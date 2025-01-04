@@ -1,3 +1,4 @@
+import { Sport, ItemLiveCompetition} from '../types/api';
 import { FeedPhaseDisplay } from './FeedPhaseDisplay';
 import { FeedSportEventDisplay } from './FeedSportEventDisplay';
 

@@ -1,5 +1,7 @@
 import { OneSquareScore } from './OneSquareScore';
 import { FeedSportIncomingDisplay } from '../listing/FeedSportIncomingDisplay';
+import { Sport, ItemLiveSportCollectif } from '../types/api';
+import { Link } from 'react-router-dom';
 
 interface Props {
     sport: Sport;
@@ -20,7 +22,21 @@ function FeedSportCollectifDisplay({ sportCollectifItem, sport }: Props) {
             />
         );
     }
-    if (['Football', 'Rugby', 'Basket'].includes(sport)) {
+    if (sport === 'Football') {
+        return (
+            <Link to={`/football/${sportCollectifItem.id}`}>
+                <OneSquareScore sportCollectifItem={sportCollectifItem} />
+            </Link>
+        );
+    }
+    if (sport === 'Basket') {
+        return (
+            <Link to={"/basketball"} state={{ path: sportCollectifItem.lien.replace("https://www.lequipe.fr", "") }}>
+                <OneSquareScore sportCollectifItem={sportCollectifItem} />
+            </Link>
+        );
+    }
+    if (sport === 'Rugby') {
         return <OneSquareScore sportCollectifItem={sportCollectifItem} />;
     }
     return <div>Unknown sport {sport}</div>;

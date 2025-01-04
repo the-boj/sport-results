@@ -1,13 +1,13 @@
 /*****
  * Generic types
  */
-interface Title {
+export interface Title {
     __type: 'text_box';
     style: Style;
     text: string;
 }
 
-interface Style {
+export interface Style {
     __type: string;
     border_color: string;
     font: string;
@@ -15,14 +15,14 @@ interface Style {
     variant: Variant[];
 }
 
-interface Variant {
+export interface Variant {
     __type: string;
     border_color: string;
     text_color: string;
     mode: string;
 }
 
-interface Statut {
+export interface Statut {
     __type: 'evenement_statut';
     periode: string;
     style: Style;
@@ -30,34 +30,34 @@ interface Statut {
     type: 'termine' | 'avenir' | 'encours';
 }
 
-interface Country {
+export interface Country {
     __type: string;
     abreviation: string;
     url_drapeau: string;
 }
 
-type Sport = 'Basket' | 'Rugby' | 'Football' | 'Tennis';
+export type Sport = 'Basket' | 'Rugby' | 'Football' | 'Tennis';
 
 /*****
  * Data API types
  */
-interface ApiResponse {
+export interface ApiResponse {
     __type: string;
     data: Data[];
     updated_at: string;
 }
 
-interface Data {
+export interface Data {
     __type: 'page_descriptor';
     content: Content;
 }
 
-interface Content {
+export interface Content {
     __type: 'page_descriptor_content';
     feed: Feed;
 }
 
-interface Feed {
+export interface Feed {
     __type: 'page_descriptor_feed';
     items: (ItemLiveSport | FeedItemOther | FeedItemImage | FeedItemDFP)[];
 }
@@ -65,33 +65,33 @@ interface Feed {
 /*****
  * Items to display types
  */
-interface ItemLiveSport {
+export interface ItemLiveSport {
     __type: 'live_listing_widget';
     items: (ItemLiveCompetition | FeedItemOther | FeedItemImage | FeedItemDFP)[];
     title: Title;
     type: 'sport';
 }
-interface ItemLiveCompetition {
+export interface ItemLiveCompetition {
     __type: 'live_listing_widget';
     items: (ItemLiveSportEvent | ItemLivePhase | FeedItemOther | FeedItemImage | FeedItemDFP)[];
     title: Title;
     type: 'competition';
 }
-interface ItemLivePhase {
+export interface ItemLivePhase {
     __type: 'live_listing_widget';
     items: (ItemLiveSportEvent | FeedItemOther | FeedItemImage | FeedItemDFP)[];
     title?: Title;
     type: 'phase';
 }
-interface ItemLiveSportEvent {
+export interface ItemLiveSportEvent {
     __type: 'sport_event_widget';
     event: ItemLiveSportMeeting;
 }
 /******
  * Single item information types
  */
-type ItemLiveSportMeeting = ItemLiveTennis | ItemLiveSportCollectif | ItemLiveCourse | ItemLiveAllo;
-interface ItemLiveAllo {
+export type ItemLiveSportMeeting = ItemLiveTennis | ItemLiveSportCollectif | ItemLiveCourse | ItemLiveAllo;
+export interface ItemLiveAllo {
     __type: 'allo';
     commente: boolean;
     date: string;
@@ -101,21 +101,22 @@ interface ItemLiveAllo {
     statut: Statut;
     titre: string;
 }
-interface ItemLiveTennis {
+export interface ItemLiveTennis {
     __type: 'match_tennis';
     date: string;
     id: string;
     statut: Statut;
     specifics: SpecificsTennis;
 }
-interface ItemLiveSportCollectif {
+export interface ItemLiveSportCollectif {
     __type: 'rencontre_sport_collectif';
     date: string;
     id: string;
+    lien: string;
     statut: Statut;
     specifics: SpecificsSportCollectif;
 }
-interface ItemLiveCourse {
+export interface ItemLiveCourse {
     __type: 'course';
     commente: boolean;
     date: string;
@@ -125,16 +126,16 @@ interface ItemLiveCourse {
     statut: Statut;
     specifics: SpecificsCourse;
 }
-interface SpecificsCourse {
+export interface SpecificsCourse {
     __type: 'specifics_course';
     classement?: Classement[];
 }
-interface Classement {
+export interface Classement {
     __type: 'race_ranking_widget';
     person: Person;
     title: Title;
 }
-interface Person {
+export interface Person {
     __type: 'personne';
     id: string;
     nom: string;
@@ -143,7 +144,7 @@ interface Person {
     pays: Country;
     prenom: string;
 }
-interface CoursePerson {
+export interface CoursePerson {
     __type: 'personne';
     id: string;
     nom: string;
@@ -152,25 +153,25 @@ interface CoursePerson {
     pays: Country;
     prenom: 'Francesco';
 }
-interface SpecificsTennis {
+export interface SpecificsTennis {
     __type: 'specifics_rencontre_tennis';
     domicile: TennisData;
     exterieur: TennisData;
     sets?: TennisSet[];
     vainqueur?: 'domicile' | 'exterieur';
 }
-interface SpecificsSportCollectif {
+export interface SpecificsSportCollectif {
     __type: 'specifics_sport_collectif';
     domicile: EquipeData;
     exterieur: EquipeData;
     score?: Score;
     vainqueur?: 'domicile' | 'exterieur';
 }
-interface TennisData {
+export interface TennisData {
     __type: 'effectif_tennis';
     sportifs: Sportif[];
 }
-interface Sportif {
+export interface Sportif {
     __type: 'tennisman';
     id: string;
     nom: string;
@@ -180,11 +181,11 @@ interface Sportif {
     prenom: string;
     rang: string;
 }
-interface EquipeData {
+export interface EquipeData {
     __type: 'effectif_sport_collectif';
     equipe: Equipe;
 }
-interface Equipe {
+export interface Equipe {
     __type: 'equipe';
     id: string;
     nom: string;
@@ -192,12 +193,12 @@ interface Equipe {
     short_name: string;
     url_image: string;
 }
-interface Score {
+export interface Score {
     __type: 'score';
     domicile: string;
     exterieur: string;
 }
-interface TennisSet {
+export interface TennisSet {
     __type: 'tennis_set';
     en_cours: boolean;
     gagnant: string;
@@ -206,13 +207,13 @@ interface TennisSet {
     score_tie: ScoreTie;
 }
 
-interface ScoreJeux {
+export interface ScoreJeux {
     __type: 'score';
     domicile: string;
     exterieur: string;
 }
 
-interface ScoreTie {
+export interface ScoreTie {
     __type: 'score';
     domicile: string;
     exterieur: string;
@@ -220,14 +221,21 @@ interface ScoreTie {
 /*****
  * Ads -> to drop
  */
-interface FeedItemOther {
+export interface FeedItemOther {
     __type: 'outbrain_widget';
 }
 
-interface FeedItemImage {
+export interface FeedItemImage {
     __type: 'image_widget';
 }
 
-interface FeedItemDFP {
+export interface FeedItemDFP {
     __type: 'DFP_banner_widget';
 }
+
+export interface Instant {
+    __type: "instant"
+    date: string
+    libelle: string
+  }
+  
