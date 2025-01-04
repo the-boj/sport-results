@@ -1,7 +1,6 @@
 # sport-results
 
 A PWA for sports results.
-Can be build with ionic to generate a native app.
 
 No tracking, no ad, no data collection, no bloat.
 The source of the API is a website with way too much ads, and a bloated UI.
@@ -21,23 +20,4 @@ We're not using the live results options that they have, because we don't want t
 
 It's a React app, with TailwindCSS, and build with Vite. Minimum dependencies.
 Components are mostly mirroring the API.
-
-## The PWA
-
 Is hosted on ...
-
-## The native app
-
-Is not hostend on any store.
-You will need to build it with ionic and install it on your device.
-To do so, this is what you need to do :
-
-```
-npm ci
-
-npm run build
-npx ionic sync android (or ios)
-npx ionic open android (or ios)
-```
-
-Then you create your APK or IPA and install it on your device.
