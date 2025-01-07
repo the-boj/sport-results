@@ -33,7 +33,7 @@ function FeedSportSkeleton({ items }: { items: string[] }) {
 function DataDisplaySkeleton() {
     return (
         <div className="flex flex-col w-full h-full">
-            <FeedSportSkeleton items={["40%", "30%", "35%"]} />
+            <FeedSportSkeleton items={["40%", "25%", "35%"]} />
             <FeedSportSkeleton items={["20%", "40%", "25%"]} />
             <FeedSportSkeleton items={["35%", "25%", "40%"]} />
         </div>

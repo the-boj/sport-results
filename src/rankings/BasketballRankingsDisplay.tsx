@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function BasketballRankings() {
+function BasketballRankingsDisplay() {
     const [activeTab, setActiveTab] = useState<'West' | 'East'>('West');
 
     return (
@@ -55,4 +55,4 @@ function BasketballRankings() {
     );
 }
 
-export { BasketballRankings };
+export { BasketballRankingsDisplay };

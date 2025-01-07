@@ -21,3 +21,14 @@ We're not using the live results options that they have, because we don't want t
 It's a React app, with TailwindCSS, and build with Vite. Minimum dependencies.
 Components are mostly mirroring the API.
 Is hosted on ...
+
+## Details
+
+Some rankings are not available on the API, so we have to fetch them as an iFrame from the website. The list of rankings that are concerned can be found below. Some others that are not available on the API are not yet supported. If there is no rankings button available there, it's because it's not supported yet.
+We check the JS and CSS files, and there are no really dangerous code.
+But keep in mind that this is not API only, and you might want to avoid those pages.
+
+### Rankings from iFrame
+
+- Basketball:
+  - NBA
