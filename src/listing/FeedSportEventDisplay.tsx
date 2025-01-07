@@ -21,7 +21,6 @@ function FeedSportEventDisplay({ sportItem, sport }: Props) {
     } else if (item.__type === "allo") {
         return <FeedAlloDisplay alloItem={item} />
     }
-    console.log("ITEM", JSON.stringify(item, null , 2))
     return <div>Unknown Live Item</div>
 }
 

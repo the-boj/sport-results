@@ -5,6 +5,7 @@ import { FootballRecap } from '../types/football/recap';
 import { FootballFlux } from '../types/football/flux';
 import { FootballRecapDisplay } from '../football/FootballRecapDisplay';
 import { FootballFluxDisplay } from '../football/FootballFluxDisplay';
+import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
 
 function Football() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -35,14 +36,17 @@ function Football() {
         fetchData();
     }, []);
 
+    if (loading) {
+        return <DetailsDisplaySkeleton />;
+    }
     if (!loading && !recapData && !fluxData) {
         return <div>No data</div>;
     }
     return (
         <div className="flex flex-col w-full h-[100vh]">
             <div className="flex justify-between items-center">
-                <Link to="/">
-                    <div className="text-md p-2 w-[100px]">{'< Retour'}</div>
+                <Link style={{ width: '100px' }} to="/">
+                    <div className="text-md p-2">{'< Retour'}</div>
                 </Link>
                 <div className="text-xl font-bold">
                     {recapData?.statut.type === 'termine' ? 'Terminé' : recapData?.statut.libelle}

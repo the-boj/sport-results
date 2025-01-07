@@ -1,4 +1,4 @@
-import { Sport, ItemLiveCompetition} from '../types/api';
+import { Sport, ItemLiveCompetition } from '../types/api';
 import { FeedPhaseDisplay } from './FeedPhaseDisplay';
 import { FeedSportEventDisplay } from './FeedSportEventDisplay';
 
@@ -14,7 +14,12 @@ function FeedCompetitionDisplay({ competitionItem, sport }: Props) {
             {competitionItem.items
                 .filter((item) => item.__type === 'live_listing_widget')
                 .map((item, i) => (
-                    <FeedPhaseDisplay key={`FCD-${i}`} sport={sport} phaseItem={item} />
+                    <FeedPhaseDisplay
+                        key={`FCD-${i}`}
+                        sport={sport}
+                        phaseItem={item}
+                        competitionTitle={competitionItem.title.text}
+                    />
                 ))}
             {competitionItem.items
                 .filter((item) => item.__type === 'sport_event_widget')
