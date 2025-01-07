@@ -5,6 +5,7 @@ import { BasketballLeaderboard } from '../types/basketball/leaderboard';
 import { BasketballLeaderboardDisplay } from '../basketball/BasketballLeaderboardDisplay';
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
 import { BasketballPlayerStatsDisplay } from '../basketball/BasketballPlayerStatsDisplay';
+import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
 
 function Basketball() {
     const [loading, setLoading] = useState<boolean>(false);
@@ -35,14 +36,17 @@ function Basketball() {
         fetchData();
     }, []);
 
+    if (loading) {
+        return <DetailsDisplaySkeleton />;
+    }
     if (!loading && !leaderboardData && !playerStatsData) {
         return <div>No data</div>;
     }
     return (
         <div className="flex flex-col h-[100vh] max-w-[100wh]">
             <div className="flex justify-between items-center">
-                <Link to="/">
-                    <div className="text-md p-2 w-[100px]">{'< Retour'}</div>
+                <Link style={{ width: '100px' }} to="/">
+                    <div className="text-md p-2">{'< Retour'}</div>
                 </Link>
                 <div className="text-xl font-bold">
                     {leaderboardData?.leaderboard.status.type === 'termine'

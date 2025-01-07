@@ -81,6 +81,7 @@ export interface ItemLivePhase {
     __type: 'live_listing_widget';
     items: (ItemLiveSportEvent | FeedItemOther | FeedItemImage | FeedItemDFP)[];
     title?: Title;
+    call_to_action?: CallToAction;
     type: 'phase';
 }
 export interface ItemLiveSportEvent {
@@ -129,6 +130,15 @@ export interface ItemLiveCourse {
 export interface SpecificsCourse {
     __type: 'specifics_course';
     classement?: Classement[];
+}
+export interface CallToAction {
+    __type: 'call_to_action';
+    text: string;
+    link: Link;
+}
+export interface Link {
+    __type: 'urls';
+    web: string;
 }
 export interface Classement {
     __type: 'race_ranking_widget';
