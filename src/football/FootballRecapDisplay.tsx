@@ -3,30 +3,19 @@ import { But, Carton, FootballRecap } from '../types/football/recap';
 
 type FootballEvent = (But & { team: string; group: 'but' }) | (Carton & { team: string; group: 'carton' });
 
-function DomicileEvent({ event }: { event: FootballEvent }) {
+function MatchEvent({ event, type }: { event: FootballEvent; type: 'Domicile' | 'Exterieur' }) {
     return (
-        <div className="flex flex-row-reverse items-center pr-[52%]">
+        <div className={`flex ${type === 'Domicile' ? 'flex-row-reverse pr-[52%]' : 'flex-row pl-[52%]'} items-center`}>
             {event.group === 'but' ? (
-                <div className="w-[20px] h-[20px] rounded-[50%] bg-green-600" />
+                <>
+                    <div className="w-[20px] h-[20px] rounded-[50%] bg-green-600" />
+                    <span>{event.libelle_type}</span>
+                </>
             ) : (
                 <div className="w-[20px] h-[20px] bg-yellow-300" />
             )}
             <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
-            <div className='whitespace-nowrap overflow-hidden text-ellipsis'>{event.joueur.nom_abrege}</div>
-        </div>
-    );
-}
-
-function ExterieurEvent({ event }: { event: FootballEvent }) {
-    return (
-        <div className="flex flex-row items-center pl-[52%]">
-            {event.group === 'but' ? (
-                <div className="w-[20px] h-[20px] rounded-[50%] bg-green-600" />
-            ) : (
-                <div className="w-[20px] h-[20px] bg-yellow-300" />
-            )}
-            <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
-            <div className='whitespace-nowrap overflow-hidden text-ellipsis'>{event.joueur.nom_abrege}</div>
+            <div className="whitespace-nowrap overflow-hidden text-ellipsis">{event.joueur.nom_abrege}</div>
         </div>
     );
 }
@@ -127,7 +116,11 @@ function FootballRecapDisplay({ recapData }: Props) {
             <div className="flex flex-col items-center w-full mt-2">
                 {events.map((event) => (
                     <div className="w-full">
-                        {event.team === 'domicile' ? <DomicileEvent event={event} /> : <ExterieurEvent event={event} />}
+                        {event.team === 'domicile' ? (
+                            <MatchEvent event={event} type="Domicile" />
+                        ) : (
+                            <MatchEvent event={event} type="Exterieur" />
+                        )}
                     </div>
                 ))}
             </div>

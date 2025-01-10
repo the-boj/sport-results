@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import { FootballFlux, Item } from '../types/football/flux';
+import { requestFootballFlux } from '../utils/api';
 
 function backgroundColor(type: string) {
     if (type === 'but') {
@@ -31,12 +33,39 @@ function Remplacement({ item }: { item: Item }) {
 }
 
 interface Props {
-    fluxData: FootballFlux;
+    matchId: string;
 }
-function FootballFluxDisplay({ fluxData }: Props) {
+function FootballFluxDisplay({ matchId }: Props) {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [_error, setError] = useState<string>();
+    const [fluxData, setFluxData] = useState<FootballFlux>();
+
+    async function fetchData() {
+        if (!loading && matchId) {
+            setLoading(true);
+            try {
+                const fluxData = await requestFootballFlux(matchId);
+                setFluxData(fluxData);
+            } catch (error) {
+                setError("Couldn't fetch the data from the server");
+            } finally {
+                setLoading(false);
+            }
+        }
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div>Loading</div>;
+    }
+    if (!fluxData) {
+        return <div>No data</div>;
+    }
     return (
-        <div className="flex flex-col w-full overflow-scroll border-t-2 border-gray-300 pt-2">
-            <div className="w-full text-center text-2xl font-bold">Flux</div>
+        <div className="flex flex-col w-full overflow-scroll p-1">
             {fluxData.items
                 .filter((item) => item.objet.texte)
                 .map((item) => (

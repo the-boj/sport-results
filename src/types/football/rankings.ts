@@ -1,24 +1,51 @@
 import { Equipe, ItemLiveCompetition, Statut } from "../api";
 import { Specifics } from "./recap";
 
+export const COMPETITION_TO_SLUG = {
+    'Ligue 1': 'ligue-1',
+    'Ligue 2': 'ligue-2',
+    'National': 'national',
+    "Championnat d'Angleterre": 'championnat-d-angleterre',
+    "Championnat d'Italie": 'championnat-d-italie',
+    "Championnat d'Espagne": 'championnat-d-espagne',
+    "Championnat d'Allemagne": 'championnat-d-allemagne',
+    'Championnat du Portugal': 'championnat-du-portugal',
+    "Championnat d'Écosse": 'championnat-d-ecosse',
+    'Championnat de Turquie': 'championnat-de-turquie',
+    'Championnat de Belgique': 'championnat-de-belgique',
+    'Championnat des Pays-Bas': 'championnat-des-pays-bas',
+    "Championnat d'Arabie Saoudite": 'championnat-d-arabie-saoudite',
+    NBA: 'nba',
+    'Top 14': 'top-14',
+};
 export type ChampionshipNames =
     | 'championnat-d-angleterre'
     | 'ligue-1'
+    | 'ligue-2'
+    | 'national'
     | 'championnat-d-italie'
     | 'championnat-d-espagne'
     | 'championnat-d-allemagne'
     | 'championnat-du-portugal'
     | 'championnat-d-ecosse'
-    | 'championnat-de-turquie';
+    | 'championnat-de-turquie'
+    | 'championnat-de-belgique'
+    | 'championnat-des-pays-bas'
+    | 'championnat-d-arabie-saoudite';
 export const Championship: ChampionshipNames[] = [
     'championnat-d-angleterre',
     'ligue-1',
+    'ligue-2',
+    'national',
     'championnat-d-italie',
     'championnat-d-espagne',
     'championnat-d-allemagne',
     'championnat-du-portugal',
     'championnat-d-ecosse',
     'championnat-de-turquie',
+    'championnat-de-belgique',
+    'championnat-des-pays-bas',
+    'championnat-d-arabie-saoudite',
 ];
 
 export interface FootballRankings {
