@@ -56,29 +56,28 @@ function Football() {
                 <div className="w-[100px]" />
             </div>
             <FootballRecapDisplay recapData={recapData} />
-            <div className="flex flex-col">
-                <div className="flex w-full">
-                    <button
-                        onClick={() => setActiveTab('Flux')}
-                        className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
-                            activeTab === 'Flux'
-                                ? 'border-b-2 border-blue-500 text-blue-800'
-                                : 'text-gray-500 hover:text-gray-700'
-                        }`}
-                    >
-                        Flux
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('Compositions')}
-                        className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
-                            activeTab === 'Compositions'
-                                ? 'border-b-2 border-blue-500 text-blue-800'
-                                : 'text-gray-500 hover:text-gray-700'
-                        }`}
-                    >
-                        Compositions
-                    </button>
-                    {/* <button
+            <div className="flex w-full">
+                <button
+                    onClick={() => setActiveTab('Flux')}
+                    className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
+                        activeTab === 'Flux'
+                            ? 'border-b-2 border-blue-500 text-blue-800'
+                            : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                    Flux
+                </button>
+                <button
+                    onClick={() => setActiveTab('Compositions')}
+                    className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
+                        activeTab === 'Compositions'
+                            ? 'border-b-2 border-blue-500 text-blue-800'
+                            : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                    Compositions
+                </button>
+                {/* <button
                         onClick={() => setActiveTab('Stats')}
                         className={`w-[34%] px-4 py-2 font-medium focus:outline-none ${
                             activeTab === 'Stats'
@@ -88,6 +87,7 @@ function Football() {
                     >
                         Stats
                     </button> */}
+                {recapData?.individual_statistics_feed_url && (
                     <button
                         onClick={() => setActiveTab('Players')}
                         className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
@@ -98,7 +98,9 @@ function Football() {
                     >
                         Joueurs
                     </button>
-                </div>
+                )}
+            </div>
+            <div className="flex-1 min-h-0 overflow-scroll">
                 {activeTab === 'Flux' && <FootballFluxDisplay matchId={matchId} />}
                 {activeTab === 'Compositions' && (
                     <FootballCompositionsDisplay

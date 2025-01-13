@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import { FootballFlux, Item } from '../types/football/flux';
 import { requestFootballFlux } from '../utils/api';
 
-function backgroundColor(type: string) {
+function backgroundColor(type: string, picto_web?: string) {
     if (type === 'but') {
         return 'green';
     }
     if (type === 'carton') {
-        return '#FFF176';
+        if (picto_web === 'carton_jaune') {
+            return '#FFF176';
+        }
+        return '#FF7043';
     }
     return '';
 }
@@ -68,11 +71,12 @@ function FootballFluxDisplay({ matchId }: Props) {
         <div className="flex flex-col w-full overflow-scroll p-1">
             {fluxData.items
                 .filter((item) => item.objet.texte)
-                .map((item) => (
+                .map((item, i) => (
                     <div
+                        key={`FLUX-${item.objet.type}-${i}`}
                         className="flex border-b-2"
                         style={{
-                            background: backgroundColor(item.objet.type),
+                            background: backgroundColor(item.objet.type, item.objet.picto_web),
                             color: textColor(item.objet.type),
                         }}
                     >

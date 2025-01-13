@@ -12,7 +12,7 @@ function MatchEvent({ event, type }: { event: FootballEvent; type: 'Domicile' | 
                     <span>{event.libelle_type}</span>
                 </>
             ) : (
-                <div className="w-[20px] h-[20px] bg-yellow-300" />
+                <div className={`w-[20px] h-[20px] ${event.type === 'jaune' ? 'bg-yellow-300' : 'bg-red-600'}`} />
             )}
             <div className="ml-[5px] mr-[5px]">{event.instant.date}'</div>
             <div className="whitespace-nowrap overflow-hidden text-ellipsis">{event.joueur.nom_abrege}</div>
@@ -114,8 +114,8 @@ function FootballRecapDisplay({ recapData }: Props) {
                 </div>
             </div>
             <div className="flex flex-col items-center w-full mt-2">
-                {events.map((event) => (
-                    <div className="w-full">
+                {events.map((event, i) => (
+                    <div key={`RECAP-${event.team}-${i}`} className="w-full">
                         {event.team === 'domicile' ? (
                             <MatchEvent event={event} type="Domicile" />
                         ) : (

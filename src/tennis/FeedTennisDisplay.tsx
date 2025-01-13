@@ -36,7 +36,7 @@ function ScoreColumDisplay({ set }: ScoreRowProps) {
             <span
                 style={{
                     fontWeight: domicileWinner ? 'bold' : 'normal',
-                    backgroundColor: domicileWinner ? 'black' : 'grey',
+                    backgroundColor: set.en_cours ? 'red' : domicileWinner ? 'black' : 'grey',
                 }}
                 className="text-center text-white w-[30px] p-1 mr-[2px] mb-[1px]"
             >
@@ -45,7 +45,7 @@ function ScoreColumDisplay({ set }: ScoreRowProps) {
             <span
                 style={{
                     fontWeight: exterieurWinner ? 'bold' : 'normal',
-                    backgroundColor: exterieurWinner ? 'black' : 'grey',
+                    backgroundColor: set.en_cours ? 'red' : exterieurWinner ? 'black' : 'grey',
                 }}
                 className="text-center text-white w-[30px] p-1 mr-[2px]"
             >
