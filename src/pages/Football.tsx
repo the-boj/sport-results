@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
-import { requestFootballFlux, requestFootballRecap } from '../utils/api';
+import { requestFootballRecap } from '../utils/api';
 import { Link, useParams } from 'react-router-dom';
 import { FootballRecap } from '../types/football/recap';
-import { FootballFlux } from '../types/football/flux';
 import { FootballRecapDisplay } from '../football/FootballRecapDisplay';
 import { FootballFluxDisplay } from '../football/FootballFluxDisplay';
 import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
+// import { FootballStatsDisplay } from '../football/FootballStatsDisplay';
+import { FootballPlayersDisplay } from '../football/FootballPlayersDisplay';
+import { FootballCompositionsDisplay } from '../football/FootballCompositionsDisplay';
 
 function Football() {
     const [loading, setLoading] = useState<boolean>(false);
     const [_error, setError] = useState<string>();
     const [recapData, setRecapData] = useState<FootballRecap>();
-    const [fluxData, setFluxData] = useState<FootballFlux>();
+    const [activeTab, setActiveTab] = useState<'Flux' | 'Stats' | 'Players' | 'Compositions'>('Flux');
+
     const { matchId } = useParams();
 
     async function fetchData() {
         if (!loading && matchId) {
             setLoading(true);
             try {
-                const [recapData, fluxData] = await Promise.all([
-                    requestFootballRecap(matchId),
-                    requestFootballFlux(matchId),
-                ]);
+                const recapData = await requestFootballRecap(matchId);
                 setRecapData(recapData);
-                setFluxData(fluxData);
             } catch (error) {
                 setError("Couldn't fetch the data from the server");
             } finally {
@@ -36,10 +35,13 @@ function Football() {
         fetchData();
     }, []);
 
+    if (!matchId) {
+        return <div>No matchId</div>;
+    }
     if (loading) {
         return <DetailsDisplaySkeleton />;
     }
-    if (!loading && !recapData && !fluxData) {
+    if (!recapData) {
         return <div>No data</div>;
     }
     return (
@@ -53,8 +55,64 @@ function Football() {
                 </div>
                 <div className="w-[100px]" />
             </div>
-            {recapData && <FootballRecapDisplay recapData={recapData} />}
-            {fluxData && <FootballFluxDisplay fluxData={fluxData} />}
+            <FootballRecapDisplay recapData={recapData} />
+            <div className="flex w-full">
+                <button
+                    onClick={() => setActiveTab('Flux')}
+                    className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
+                        activeTab === 'Flux'
+                            ? 'border-b-2 border-blue-500 text-blue-800'
+                            : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                    Flux
+                </button>
+                <button
+                    onClick={() => setActiveTab('Compositions')}
+                    className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
+                        activeTab === 'Compositions'
+                            ? 'border-b-2 border-blue-500 text-blue-800'
+                            : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                >
+                    Compositions
+                </button>
+                {/* <button
+                        onClick={() => setActiveTab('Stats')}
+                        className={`w-[34%] px-4 py-2 font-medium focus:outline-none ${
+                            activeTab === 'Stats'
+                                ? 'border-b-2 border-blue-500 text-blue-800'
+                                : 'text-gray-500 hover:text-gray-700'
+                        }`}
+                    >
+                        Stats
+                    </button> */}
+                {recapData?.individual_statistics_feed_url && (
+                    <button
+                        onClick={() => setActiveTab('Players')}
+                        className={`w-[100%] px-4 py-2 font-medium focus:outline-none ${
+                            activeTab === 'Players'
+                                ? 'border-b-2 border-blue-500 text-blue-800'
+                                : 'text-gray-500 hover:text-gray-700'
+                        }`}
+                    >
+                        Joueurs
+                    </button>
+                )}
+            </div>
+            <div className="flex-1 min-h-0 overflow-scroll">
+                {activeTab === 'Flux' && <FootballFluxDisplay matchId={matchId} />}
+                {activeTab === 'Compositions' && (
+                    <FootballCompositionsDisplay
+                        domicile={recapData.specifics.domicile}
+                        exterieur={recapData.specifics.exterieur}
+                    />
+                )}
+                {/* {activeTab === 'Stats' && <FootballStatsDisplay matchId={matchId} />} */}
+                {recapData?.individual_statistics_feed_url && activeTab === 'Players' && (
+                    <FootballPlayersDisplay url={recapData.individual_statistics_feed_url} />
+                )}
+            </div>
         </div>
     );
 }

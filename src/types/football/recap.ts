@@ -10,6 +10,7 @@ export interface FootballRecap {
     subtitle: Subtitle;
     specifics: Specifics;
     score_aller: string;
+    individual_statistics_feed_url: string;
 }
 
 export interface Subtitle {

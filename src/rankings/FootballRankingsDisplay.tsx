@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { ChampionshipNames, FootballRankings } from '../types/football/rankings';
-import { requestFootballLeaderboard } from '../utils/football';
+import { requestFootballLeaderboard } from '../utils/api';
 import { Link } from 'react-router-dom';
 
 interface FootballRankingsProps {

@@ -4,6 +4,8 @@ import { FootballFlux } from '../types/football/flux';
 import { formatDateToString } from '../utils/utils';
 import { BasketballLeaderboard } from '../types/basketball/leaderboard';
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
+import { ChampionshipNames, FootballRankings } from '../types/football/rankings';
+import { PlayersStats } from '../types/football/player';
 
 const baseUrl = "https://dwh.lequipe.fr/api/live/lives?date=--date--&platform=desktop&version=1.0"
 
@@ -17,11 +19,19 @@ export async function requestApi(date: Date) {
  * Football
  */
 
+const footballClassementsBaseUrl = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V1/Football/ClassementsBase/current/--championship--/general.json`
 const footballRecapUrl = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V5/Football/Matchs/--ext--/--matchId--.json`
 const footballFluxUrl = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V1/Football/Commentaires/--ext--/--matchId--.json`
-// const footballPlayersStatsV3Url = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V3/Football/MatchPlayerStats/79/--matchId--.json`
-// const footballPlayersStatsV2Url = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/Football/MatchPlayerStats/79/--matchId--.json`
-// const footballStatsUrl = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/Football/MatchStats/79/--matchId--.json`
+// const footballPlayersStatsV2Url = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/Football/MatchPlayerStats/--ext--/--matchId--.json`
+// const footballPlayersStatsV3Url = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V3/Football/MatchPlayerStats/--ext--/--matchId--.json`
+const footballStatsUrl = `https://iphdata.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V2/Football/MatchStats/--ext--/--matchId--.json`
+
+export async function requestFootballLeaderboard(championship: ChampionshipNames) {
+    const url = footballClassementsBaseUrl.replace("--championship--", championship)
+    const res = await fetch(url)
+
+    return res.json() as Promise<FootballRankings>
+}
 
 export async function requestFootballRecap(matchId: string) {
     const ext = matchId.substring(matchId.length - 2)
@@ -37,6 +47,28 @@ export async function requestFootballFlux(matchId: string) {
     const res = await fetch(url)
 
     return res.json() as Promise<FootballFlux>
+}
+
+export async function requestFootballStats(matchId: string) {
+    const ext = matchId.substring(matchId.length - 2)
+    const url = footballStatsUrl.replace("--ext--", ext).replace("--matchId--", matchId)
+    const res = await fetch(url)
+
+    return res.json() as Promise<{}>
+}
+
+// export async function requestFootballPlayersV2(matchId: string) {
+//     const ext = matchId.substring(matchId.length - 2)
+//     const url = footballPlayersStatsV2Url.replace("--ext--", ext).replace("--matchId--", matchId)
+//     const res = await fetch(url)
+
+//     return res.json() as Promise<PlayersStats>
+// }
+
+export async function requestFootballPlayersV3(url: string) {
+    const res = await fetch(url)
+
+    return res.json() as Promise<PlayersStats>
 }
 
 /*****
