@@ -6,10 +6,9 @@ interface Props {
 function FootballField({ composition }: Props) {
     return (
         <div
-            className="football-field"
             style={{
                 position: 'relative',
-                width: '95%',
+                width: '90%',
                 height: '400px',
                 backgroundColor: 'green',
             }}

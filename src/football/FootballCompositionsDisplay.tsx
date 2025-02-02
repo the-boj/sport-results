@@ -12,7 +12,7 @@ function FootballCompositionsDisplay({ domicile, exterieur }: Props) {
                 <div className="text-2xl font-bold mb-2">{domicile.equipe.nom}</div>
                 <FootballField composition={domicile.composition} />
             </div>
-            <div className="flex flex-col mt-3">
+            <div className="flex flex-col mt-3 items-center">
                 <div className="text-2xl font-bold mb-2">{exterieur.equipe.nom}</div>
                 <FootballField composition={exterieur.composition} />
                 </div>

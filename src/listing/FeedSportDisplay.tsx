@@ -6,15 +6,19 @@ interface Props {
 }
 
 function FeedSportDisplay({ feedItem }: Props) {
+    const title = feedItem.title?.text;
+    if (!title) {
+        return <div/>;
+    }
     return (
         <div className="flex flex-col">
-            <span className="text-3xl font-bold pl-3 pt-5">{feedItem.title.text}</span>
+            <span className="text-3xl font-bold pl-3 pt-5">{title}</span>
             {feedItem.items
                 .filter((item) => item.__type === 'live_listing_widget')
                 .map((item, i) => (
                     <FeedCompetitionDisplay
                         key={`FID-${i}`}
-                        sport={feedItem.title.text as Sport}
+                        sport={title as Sport}
                         competitionItem={item}
                     />
                 ))}

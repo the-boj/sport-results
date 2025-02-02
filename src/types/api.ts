@@ -68,7 +68,7 @@ export interface Feed {
 export interface ItemLiveSport {
     __type: 'live_listing_widget';
     items: (ItemLiveCompetition | FeedItemOther | FeedItemImage | FeedItemDFP)[];
-    title: Title;
+    title?: Title;
     type: 'sport';
 }
 export interface ItemLiveCompetition {
