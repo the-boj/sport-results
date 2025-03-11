@@ -12,14 +12,16 @@ body {
   position: relative; /* Allows for absolute positioning of the scrollable area */
 }
 
+/* Ensures content is vertically scrollable but hides the horizontal scrollbar */
 .scrollable {
   overflow-y: scroll; /* Enables vertical scrolling */
-  height: 100%; /* Full height of the parent */
+  overflow-x: hidden; /* Hides horizontal scrollbar */
+  height: calc(100vh - 115px); /* Full height of the parent, adjusted for header/filters */
   padding-right: 15px; /* Optional: space for the hidden scrollbar */
   box-sizing: content-box; /* Prevents padding from affecting width */
 }
 
-/* Hide scrollbar for WebKit browsers */
+/* Hide scrollbar for WebKit browsers (Chrome, Safari, etc.) */
 .scrollable::-webkit-scrollbar {
   width: 0; /* Hides the scrollbar */
   background: transparent; /* Optional: makes the scrollbar background transparent */
@@ -28,6 +30,20 @@ body {
 /* Hide scrollbar for Firefox */
 .scrollable {
   scrollbar-width: none; /* Hides scrollbar */
+}
+
+/* Filters container - allow horizontal scroll but hide scrollbar */
+.filters {
+  display: flex;
+  overflow-x: auto; /* Allow horizontal scroll for the filter section */
+  overflow-y: hidden; /* Prevent vertical scroll */
+  padding: 5px 0; /* Optional: spacing around the filter buttons */
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
+.filters::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar in WebKit-based browsers */
 }
 
 span {

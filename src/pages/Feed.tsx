@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { requestApi } from '../utils/api';
 import { DataDisplay } from '../listing/DataDisplay';
 import { DataDisplaySkeleton } from '../skeleton/DataDisplaySkeleton';
 import { ApiResponse } from '../types/api';
+import { getScrollToId } from '../utils/ids';
+import { FilterSkeleton } from '../skeleton/FiltersSkeleton';
 
 interface DateSelectorProps {
     selectedDate: Date;
@@ -55,6 +57,28 @@ function Feed() {
     const [_error, setError] = useState<string>();
     const [apiData, setApiData] = useState<ApiResponse>();
 
+    const filters = useMemo(() => {
+        return apiData?.data[0].content.feed.items
+            .filter((item) => item.__type === 'live_listing_widget')
+            .map((item, i) => item.title?.text)
+            .filter((item) => item)
+            .sort();
+    }, [apiData]);
+
+    // This function will do a smooth scroll to the DOM element whose id we know
+    function handleFilterClick(filterTitle?: string) {
+        // Create or match the same ID you used in your rendered item
+        // e.g. `scroll-to-My Event Name` becomes `scroll-to-my-event-name`
+        if (!filterTitle) {
+            return;
+        }
+        const safeId = getScrollToId(filterTitle);
+        const el = document.getElementById(safeId);
+        if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
     async function fetchData() {
         if (!loading) {
             setLoading(true);
@@ -81,7 +105,22 @@ function Feed() {
             <div className="h-[55px] mb-[10px]">
                 <DateSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
             </div>
-            <div style={{ height: 'calc(100vh - 65px)' }} className="overflow-scroll scrollable">
+            <div className="filters w-full pb-[5px]">
+                {loading ? (
+                    <FilterSkeleton />
+                ) : (
+                    filters?.map((filter, i) => (
+                        <div
+                            onClick={() => handleFilterClick(filter)}
+                        className="flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center bg-gray-200 text-sm text-black cursor-pointer"
+                        key={`FILTER-${i}`}
+                    >
+                        {filter}
+                        </div>
+                    ))
+                )}
+            </div>
+            <div style={{ height: 'calc(100vh - 115px)' }} className="overflow-scroll scrollable">
                 {loading ? (
                     <DataDisplaySkeleton />
                 ) : (

@@ -1,3 +1,4 @@
+import { ItemLiveCourse } from '../types/api';
 import { Thumb } from '../utils/thumb';
 
 interface Props {
