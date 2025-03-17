@@ -8,7 +8,6 @@ interface Props {
     competitionTitle: string;
 }
 function FeedPhaseDisplay({ phaseItem, sport, competitionTitle }: Props) {
-    console.log(competitionTitle);
     return (
         <div className="flex flex-col mb-2">
             {phaseItem.title?.text && (

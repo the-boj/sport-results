@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { requestFootballRecap } from '../utils/api';
-import { Link, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FootballRecap } from '../types/football/recap';
 import { FootballRecapDisplay } from '../football/FootballRecapDisplay';
 import { FootballFluxDisplay } from '../football/FootballFluxDisplay';
@@ -10,6 +10,8 @@ import { FootballPlayersDisplay } from '../football/FootballPlayersDisplay';
 import { FootballCompositionsDisplay } from '../football/FootballCompositionsDisplay';
 
 function Football() {
+    const navigate = useNavigate();
+    
     const [loading, setLoading] = useState<boolean>(false);
     const [_error, setError] = useState<string>();
     const [recapData, setRecapData] = useState<FootballRecap>();
@@ -47,9 +49,9 @@ function Football() {
     return (
         <div className="flex flex-col w-full h-[100vh]">
             <div className="flex justify-between items-center">
-                <Link style={{ width: '100px' }} to="/">
+                <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
                     <div className="text-md p-2">{'< Retour'}</div>
-                </Link>
+                </div>
                 <div className="text-xl font-bold">
                     {recapData?.statut.type === 'termine' ? 'Terminé' : recapData?.statut.libelle}
                 </div>

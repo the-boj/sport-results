@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { requestBasketballLeaderboard, requestBasketballPlayerStats } from '../utils/api';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BasketballLeaderboard } from '../types/basketball/leaderboard';
 import { BasketballLeaderboardDisplay } from '../basketball/BasketballLeaderboardDisplay';
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
@@ -8,6 +8,8 @@ import { BasketballPlayerStatsDisplay } from '../basketball/BasketballPlayerStat
 import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
 
 function Basketball() {
+    const navigate = useNavigate();
+
     const [loading, setLoading] = useState<boolean>(false);
     const [_error, setError] = useState<string>();
     const [leaderboardData, setLeaderboardData] = useState<BasketballLeaderboard>();
@@ -45,9 +47,9 @@ function Basketball() {
     return (
         <div className="flex flex-col h-[100vh] max-w-[100wh]">
             <div className="flex justify-between items-center">
-                <Link style={{ width: '100px' }} to="/">
+                <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
                     <div className="text-md p-2">{'< Retour'}</div>
-                </Link>
+                </div>
                 <div className="text-xl font-bold">
                     {leaderboardData?.leaderboard.status.type === 'termine'
                         ? 'Terminé'

@@ -5,56 +5,22 @@ import { DataDisplaySkeleton } from '../skeleton/DataDisplaySkeleton';
 import { ApiResponse } from '../types/api';
 import { getScrollToId } from '../utils/ids';
 import { FilterSkeleton } from '../skeleton/FiltersSkeleton';
+import { useSearchParams } from 'react-router-dom';
+import { DateSelector } from '../app/DateSelector';
 
-interface DateSelectorProps {
-    selectedDate: Date;
-    setSelectedDate: (date: Date) => void;
-}
-
-function DateSelector({ selectedDate, setSelectedDate }: DateSelectorProps) {
-    const today = new Date();
-    const days: Date[] = [];
-
-    for (let i = -2; i <= 2; i++) {
-        const date = new Date(today);
-        date.setDate(today.getDate() + i);
-        days.push(date);
-    }
-
-    const handleDateClick = (date: Date) => {
-        setSelectedDate(date);
-    };
-
-    return (
-        <div className="flex w-full items-center overflow-x-auto p-2">
-            {days.map((date, i) => {
-                const isSelected = selectedDate.toDateString() === date.toDateString();
-                return (
-                    <div
-                        key={date.toISOString()}
-                        onClick={() => handleDateClick(date)}
-                        className={`flex flex-col justify-center w-[18%] h-[50px] mx-2 rounded text-center 
-                            ${isSelected ? 'bg-black text-white' : 'bg-gray-200 text-black'}`}
-                    >
-                        {i === 2 ? (
-                            <span>Today</span>
-                        ) : (
-                            <>
-                                <span className="w-full">{date.toLocaleDateString('en-GB', { weekday: 'short' })}</span>
-                                <span>{date.toLocaleDateString('en-GB', { day: 'numeric' })}</span>
-                            </>
-                        )}
-                    </div>
-                );
-            })}
-        </div>
-    );
+function isSelectedClasses(filter?: string, selected?: string | null) {
+    let baseClasses = "flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center text-sm cursor-pointer"
+    return filter === selected ? `${baseClasses} bg-black text-white` : `${baseClasses} bg-gray-200 text-black`;
 }
 
 function Feed() {
+    const [searchParams, setSearchParams] = useSearchParams();
+
+    const filterParam = searchParams.get('filter');
+    const dateParam = searchParams.get('date');
+
     const [loading, setLoading] = useState<boolean>(false);
-    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-    const [_error, setError] = useState<string>();
+    const [selectedDate, setSelectedDate] = useState<Date>(dateParam ? new Date(dateParam) : new Date());
     const [apiData, setApiData] = useState<ApiResponse>();
 
     const filters = useMemo(() => {
@@ -66,17 +32,31 @@ function Feed() {
     }, [apiData]);
 
     // This function will do a smooth scroll to the DOM element whose id we know
-    function handleFilterClick(filterTitle?: string) {
+    function handleFilterClick(filterTitle?: string, onLoad?: boolean) {
         // Create or match the same ID you used in your rendered item
         // e.g. `scroll-to-My Event Name` becomes `scroll-to-my-event-name`
         if (!filterTitle) {
             return;
         }
-        const safeId = getScrollToId(filterTitle);
-        const el = document.getElementById(safeId);
-        if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+        if (filterTitle === filterParam && !onLoad) {
+            setSearchParams({ ...(dateParam ? { date: dateParam } : {}) });
+            const el = document.getElementById("top-of-feed");
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        } else {
+            const safeId = getScrollToId(filterTitle);
+            const el = document.getElementById(safeId);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+                setSearchParams({ ...(dateParam ? { date: dateParam } : {}), filter: filterTitle });
+            }
         }
+    }
+
+    function handleDateClick(date: Date) {
+        setSelectedDate(date);
+        setSearchParams({ date: date.toISOString(), ...(filterParam ? { filter: filterParam } : {}) });
     }
 
     async function fetchData() {
@@ -85,8 +65,6 @@ function Feed() {
             try {
                 const data = await requestApi(selectedDate);
                 setApiData(data);
-            } catch (error) {
-                setError("Couldn't fetch the data from the server");
             } finally {
                 setLoading(false);
             }
@@ -97,13 +75,19 @@ function Feed() {
         fetchData();
     }, [selectedDate]);
 
+    useEffect(() => {
+        if (apiData && filterParam) {
+            handleFilterClick(filterParam, true);
+        }
+    }, [apiData, filterParam]);
+
     if (!loading && !apiData) {
         return <div>No data</div>;
     }
     return (
         <div className="flex flex-col">
             <div className="h-[55px] mb-[10px]">
-                <DateSelector selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+                <DateSelector selectedDate={selectedDate} handleDateClick={handleDateClick} />
             </div>
             <div className="filters w-full pb-[5px]">
                 {loading ? (
@@ -112,15 +96,16 @@ function Feed() {
                     filters?.map((filter, i) => (
                         <div
                             onClick={() => handleFilterClick(filter)}
-                        className="flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center bg-gray-200 text-sm text-black cursor-pointer"
-                        key={`FILTER-${i}`}
-                    >
-                        {filter}
+                            className={isSelectedClasses(filter, filterParam)}
+                            key={`FILTER-${i}`}
+                        >
+                            {filter}
                         </div>
                     ))
                 )}
             </div>
             <div style={{ height: 'calc(100vh - 115px)' }} className="overflow-scroll scrollable">
+                <div id="top-of-feed" />
                 {loading ? (
                     <DataDisplaySkeleton />
                 ) : (
