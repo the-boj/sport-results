@@ -8,7 +8,7 @@ import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
 // import { FootballStatsDisplay } from '../football/FootballStatsDisplay';
 import { FootballPlayersDisplay } from '../football/FootballPlayersDisplay';
 import { FootballCompositionsDisplay } from '../football/FootballCompositionsDisplay';
-import ReactPullToRefresh from 'react-pull-to-refresh/index';
+import ReactPullToRefresh from 'react-pull-to-refresh';
 
 function Football() {
     const navigate = useNavigate();

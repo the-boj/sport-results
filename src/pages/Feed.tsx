@@ -7,7 +7,7 @@ import { getScrollToId } from '../utils/ids';
 import { FilterSkeleton } from '../skeleton/FiltersSkeleton';
 import { useSearchParams } from 'react-router-dom';
 import { DateSelector } from '../app/DateSelector';
-import ReactPullToRefresh from 'react-pull-to-refresh/index';
+import ReactPullToRefresh from 'react-pull-to-refresh';
 
 function isSelectedClasses(filter?: string, selected?: string | null) {
     let baseClasses = 'flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center text-sm cursor-pointer';

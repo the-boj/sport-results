@@ -6,7 +6,7 @@ import { BasketballLeaderboardDisplay } from '../basketball/BasketballLeaderboar
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
 import { BasketballPlayerStatsDisplay } from '../basketball/BasketballPlayerStatsDisplay';
 import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
-import ReactPullToRefresh from 'react-pull-to-refresh/index';
+import ReactPullToRefresh from 'react-pull-to-refresh';
 
 function Basketball() {
     const navigate = useNavigate();
