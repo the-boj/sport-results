@@ -86,7 +86,7 @@ function Feed() {
     }
     return (
         <div className="flex flex-col">
-            <ReactPullToRefresh onRefresh={async () => window.location.reload()}>
+            <ReactPullToRefresh onRefresh={async () => window.location.reload()} distanceToRefresh={20}>
                 <div className="h-[55px] mb-[10px]">
                     <DateSelector selectedDate={selectedDate} handleDateClick={handleDateClick} />
                 </div>
