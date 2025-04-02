@@ -8,7 +8,7 @@ import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
 // import { FootballStatsDisplay } from '../football/FootballStatsDisplay';
 import { FootballPlayersDisplay } from '../football/FootballPlayersDisplay';
 import { FootballCompositionsDisplay } from '../football/FootballCompositionsDisplay';
-import { PullToRefresh } from '../app/PullToRefresh';
+// import { PullToRefresh } from '../app/PullToRefresh';
 
 function Football() {
     const navigate = useNavigate();
@@ -49,18 +49,18 @@ function Football() {
     }
     return (
         <div className="flex flex-col w-full h-[100vh]">
-            <PullToRefresh>
-                <div className="flex justify-between items-center">
-                    <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
-                        <div className="text-md p-2">{'< Retour'}</div>
-                    </div>
-                    <div className="text-xl font-bold">
-                        {recapData?.statut.type === 'termine' ? 'Terminé' : recapData?.statut.libelle}
-                    </div>
-                    <div className="w-[100px]" />
+            {/* <PullToRefresh> */}
+            <div className="flex justify-between items-center">
+                <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
+                    <div className="text-md p-2">{'< Retour'}</div>
                 </div>
-                <FootballRecapDisplay recapData={recapData} />
-            </PullToRefresh>
+                <div className="text-xl font-bold">
+                    {recapData?.statut.type === 'termine' ? 'Terminé' : recapData?.statut.libelle}
+                </div>
+                <div className="w-[100px]" />
+            </div>
+            <FootballRecapDisplay recapData={recapData} />
+            {/* </PullToRefresh> */}
             <div className="flex w-full">
                 <button
                     onClick={() => setActiveTab('Flux')}
