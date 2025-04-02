@@ -6,7 +6,7 @@ import { BasketballLeaderboardDisplay } from '../basketball/BasketballLeaderboar
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
 import { BasketballPlayerStatsDisplay } from '../basketball/BasketballPlayerStatsDisplay';
 import { DetailsDisplaySkeleton } from '../skeleton/DetailsDisplaySkeleton';
-// import { PullToRefresh } from '../app/PullToRefresh';
+import ReactPullToRefresh from 'react-pull-to-refresh/index';
 
 function Basketball() {
     const navigate = useNavigate();
@@ -47,20 +47,20 @@ function Basketball() {
     }
     return (
         <div className="flex flex-col h-[100vh] max-w-[100wh]">
-            {/* <PullToRefresh> */}
-            <div className="flex justify-between items-center">
-                <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
-                    <div className="text-md p-2">{'< Retour'}</div>
+            <ReactPullToRefresh onRefresh={async () => window.location.reload()}>
+                <div className="flex justify-between items-center">
+                    <div style={{ width: '100px' }} onClick={() => navigate(-1)}>
+                        <div className="text-md p-2">{'< Retour'}</div>
+                    </div>
+                    <div className="text-xl font-bold">
+                        {leaderboardData?.leaderboard.status.type === 'termine'
+                            ? 'Terminé'
+                            : leaderboardData?.leaderboard?.status.libelle}
+                    </div>
+                    <div className="w-[100px]" />
                 </div>
-                <div className="text-xl font-bold">
-                    {leaderboardData?.leaderboard.status.type === 'termine'
-                        ? 'Terminé'
-                        : leaderboardData?.leaderboard?.status.libelle}
-                </div>
-                <div className="w-[100px]" />
-            </div>
-            {leaderboardData && <BasketballLeaderboardDisplay leaderboardData={leaderboardData} />}
-            {/* </PullToRefresh> */}
+                {leaderboardData && <BasketballLeaderboardDisplay leaderboardData={leaderboardData} />}
+            </ReactPullToRefresh>
             {playerStatsData && <BasketballPlayerStatsDisplay playersStats={playerStatsData} />}
         </div>
     );
