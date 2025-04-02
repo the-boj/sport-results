@@ -9,7 +9,7 @@ import { useSearchParams } from 'react-router-dom';
 import { DateSelector } from '../app/DateSelector';
 
 function isSelectedClasses(filter?: string, selected?: string | null) {
-    let baseClasses = "flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center text-sm cursor-pointer"
+    let baseClasses = 'flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center text-sm cursor-pointer';
     return filter === selected ? `${baseClasses} bg-black text-white` : `${baseClasses} bg-gray-200 text-black`;
 }
 
@@ -27,8 +27,7 @@ function Feed() {
         return apiData?.data[0].content.feed.items
             .filter((item) => item.__type === 'live_listing_widget')
             .map((item, i) => item.title?.text)
-            .filter((item) => item)
-            .sort();
+            .filter((item) => item);
     }, [apiData]);
 
     // This function will do a smooth scroll to the DOM element whose id we know
@@ -40,7 +39,7 @@ function Feed() {
         }
         if (filterTitle === filterParam && !onLoad) {
             setSearchParams({ ...(dateParam ? { date: dateParam } : {}) });
-            const el = document.getElementById("top-of-feed");
+            const el = document.getElementById('top-of-feed');
             if (el) {
                 el.scrollIntoView({ behavior: 'smooth' });
             }
