@@ -7,6 +7,7 @@ import { getScrollToId } from '../utils/ids';
 import { FilterSkeleton } from '../skeleton/FiltersSkeleton';
 import { useSearchParams } from 'react-router-dom';
 import { DateSelector } from '../app/DateSelector';
+import { PullToRefresh } from '../app/PullToRefresh';
 
 function isSelectedClasses(filter?: string, selected?: string | null) {
     let baseClasses = 'flex flex-col justify-center pl-3 pr-3 mx-2 h-[40px] rounded text-center text-sm cursor-pointer';
@@ -85,24 +86,26 @@ function Feed() {
     }
     return (
         <div className="flex flex-col">
-            <div className="h-[55px] mb-[10px]">
-                <DateSelector selectedDate={selectedDate} handleDateClick={handleDateClick} />
-            </div>
-            <div className="filters w-full pb-[5px]">
-                {loading ? (
-                    <FilterSkeleton />
-                ) : (
-                    filters?.map((filter, i) => (
-                        <div
-                            onClick={() => handleFilterClick(filter)}
-                            className={isSelectedClasses(filter, filterParam)}
-                            key={`FILTER-${i}`}
-                        >
-                            {filter}
-                        </div>
-                    ))
-                )}
-            </div>
+            <PullToRefresh>
+                <div className="h-[55px] mb-[10px]">
+                    <DateSelector selectedDate={selectedDate} handleDateClick={handleDateClick} />
+                </div>
+                <div className="filters w-full pb-[5px]">
+                    {loading ? (
+                        <FilterSkeleton />
+                    ) : (
+                        filters?.map((filter, i) => (
+                            <div
+                                onClick={() => handleFilterClick(filter)}
+                                className={isSelectedClasses(filter, filterParam)}
+                                key={`FILTER-${i}`}
+                            >
+                                {filter}
+                            </div>
+                        ))
+                    )}
+                </div>
+            </PullToRefresh>
             <div style={{ height: 'calc(100vh - 115px)' }} className="overflow-scroll scrollable">
                 <div id="top-of-feed" />
                 {loading ? (

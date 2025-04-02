@@ -28,7 +28,7 @@ export const PullToRefresh: React.FC<{ children: React.ReactNode }> = ({ childre
             const distanceY = currentY - startY;
 
             // Check if the user is pulling down
-            if (distanceY > 50) {
+            if (distanceY > 70) {
                 // Trigger refresh logic
                 handleRefresh();
             }
