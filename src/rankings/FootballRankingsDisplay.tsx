@@ -40,8 +40,20 @@ function FootballRankingsDisplay({ championship }: FootballRankingsProps) {
                 rankings.items.map((item, i) => {
                     if (item.layout === 'base_header') {
                         return (
-                            <div key={`TITLE-${i}`} className="w-full text-center text-xl font-bold mb-3">
-                                {item.objet.title}
+                            <div className="flex flex-col">
+                                <div key={`TITLE-${i}`} className="w-full text-center text-xl font-bold mb-3">
+                                    {item.objet.title}
+                                </div>
+                                <div key={`TEAM-COLUMNS`} className="flex w-full mb-[3px]">
+                                    <div className="flex w-[7%] items-center justify-center">N°</div>
+                                    <div className="flex w-[45%] items-center font-bold">Équipe</div>
+                                    <div className="flex w-[9%] items-center font-bold">Pts</div>
+                                    <div className="flex w-[7%] items-center text-sm">J.</div>
+                                    <div className="flex w-[7%] items-center text-sm">Vic</div>
+                                    <div className="flex w-[7%] items-center text-sm">Nul</div>
+                                    <div className="flex w-[7%] items-center text-sm">Déf</div>
+                                    <div className="flex w-[7%] items-center text-sm">G.A.</div>
+                                </div>
                             </div>
                         );
                     }
@@ -55,7 +67,9 @@ function FootballRankingsDisplay({ championship }: FootballRankingsProps) {
                                 <div className="flex w-[7%] items-center text-sm">{team.nombre_de_victoires}</div>
                                 <div className="flex w-[7%] items-center text-sm">{team.nombre_de_nuls}</div>
                                 <div className="flex w-[7%] items-center text-sm">{team.nombre_de_defaites}</div>
-                                <div className="flex w-[7%] items-center text-sm">{team.difference_de_buts_libelle}</div>
+                                <div className="flex w-[7%] items-center text-sm">
+                                    {team.difference_de_buts_libelle}
+                                </div>
                             </div>
                         ));
                     }

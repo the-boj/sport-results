@@ -7,10 +7,10 @@ interface FeedCallToActionProps {
     competitionTitle: string;
 }
 function FeedCallToAction({ competitionTitle, sport }: FeedCallToActionProps) {
-    const competition = COMPETITION_TO_SLUG[competitionTitle as keyof typeof COMPETITION_TO_SLUG];
+    const competition = COMPETITION_TO_SLUG[competitionTitle as keyof typeof COMPETITION_TO_SLUG]?.slug;
     if (competition) {
         return (
-            <Link className="text-sm text-blue-600" to={`/rankings/${sport}/${competition}`}>
+            <Link className="text-sm text-blue-600" to={`/ranking/${sport}/${competition}`}>
                 Rankings
             </Link>
         );

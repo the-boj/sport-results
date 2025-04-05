@@ -3,10 +3,10 @@ import { BasketballRankingsDisplay } from '../rankings/BasketballRankingsDisplay
 import { FootballRankingsDisplay } from '../rankings/FootballRankingsDisplay';
 import { Championship, ChampionshipNames, COMPETITION_TO_SLUG } from '../types/football/rankings';
 
-function Rankings() {
+function Ranking() {
     const { sport, competition } = useParams();
 
-    if (sport === 'Basket' && competition === COMPETITION_TO_SLUG['NBA']) {
+    if (sport === 'Basket' && competition === COMPETITION_TO_SLUG['NBA'].slug) {
         return <BasketballRankingsDisplay />;
     }
     if (sport === 'Football' && competition && Championship.includes(competition as ChampionshipNames)) {
@@ -15,4 +15,4 @@ function Rankings() {
     return <div>Rankings not supported for this sport</div>;
 }
 
-export { Rankings };
+export { Ranking };

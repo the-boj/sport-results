@@ -1,16 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import { Feed } from '../pages/Feed';
 import { Football } from '../pages/Football';
 import { Basketball } from '../pages/Basketball';
-import { Rankings } from '../pages/Rankings';
+import { Ranking } from '../pages/Ranking';
+import { Homepage } from '../pages/Homepage';
 
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Feed />} />
+            <Route path="/" element={<Homepage />} />
             <Route path="/football/:matchId" element={<Football />} />
             <Route path="/basketball" element={<Basketball />} />
-            <Route path="/rankings/:sport/:competition" element={<Rankings />} />
+            <Route path="/ranking/:sport/:competition" element={<Ranking />} />
         </Routes>
     );
 }

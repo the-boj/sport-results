@@ -103,7 +103,7 @@ function Feed() {
                     ))
                 )}
             </div>
-            <div style={{ height: 'calc(100vh - 115px)' }} className="overflow-scroll scrollable">
+            <div style={{ height: 'calc(100vh - 165px)' }} className="overflow-scroll scrollable">
                 <div id="top-of-feed" />
                 {loading ? (
                     <DataDisplaySkeleton />
