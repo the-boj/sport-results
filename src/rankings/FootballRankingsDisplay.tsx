@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { ChampionshipNames, FootballRankings } from '../types/football/rankings';
+import { FootballRankings } from '../types/football/rankings';
+import { ChampionshipNames } from '../types/slugs';
 import { requestFootballLeaderboard } from '../utils/api';
 import { Link } from 'react-router-dom';
 
@@ -47,12 +48,12 @@ function FootballRankingsDisplay({ championship }: FootballRankingsProps) {
                                 <div key={`TEAM-COLUMNS`} className="flex w-full mb-[3px]">
                                     <div className="flex w-[7%] items-center justify-center">N°</div>
                                     <div className="flex w-[45%] items-center font-bold">Équipe</div>
-                                    <div className="flex w-[9%] items-center font-bold">Pts</div>
-                                    <div className="flex w-[7%] items-center text-sm">J.</div>
-                                    <div className="flex w-[7%] items-center text-sm">Vic</div>
-                                    <div className="flex w-[7%] items-center text-sm">Nul</div>
-                                    <div className="flex w-[7%] items-center text-sm">Déf</div>
-                                    <div className="flex w-[7%] items-center text-sm">G.A.</div>
+                                    <div className="flex w-[9%] items-center justify-center font-bold">Pts</div>
+                                    <div className="flex w-[7%] items-center justify-center text-sm">J.</div>
+                                    <div className="flex w-[7%] items-center justify-center text-sm">Vic</div>
+                                    <div className="flex w-[7%] items-center justify-center text-sm">Nul</div>
+                                    <div className="flex w-[7%] items-center justify-center text-sm">Déf</div>
+                                    <div className="flex w-[7%] items-center justify-center text-sm">G.A.</div>
                                 </div>
                             </div>
                         );
@@ -62,12 +63,22 @@ function FootballRankingsDisplay({ championship }: FootballRankingsProps) {
                             <div key={`TEAM-${i}`} className="flex w-full mb-[3px]">
                                 <div className="flex w-[7%] items-center justify-center">{team.rang}</div>
                                 <div className="flex w-[45%] items-center font-bold">{team.equipe.nom}</div>
-                                <div className="flex w-[9%] items-center font-bold">{team.nombre_points}</div>
-                                <div className="flex w-[7%] items-center text-sm">{team.nombre_de_matchs}</div>
-                                <div className="flex w-[7%] items-center text-sm">{team.nombre_de_victoires}</div>
-                                <div className="flex w-[7%] items-center text-sm">{team.nombre_de_nuls}</div>
-                                <div className="flex w-[7%] items-center text-sm">{team.nombre_de_defaites}</div>
-                                <div className="flex w-[7%] items-center text-sm">
+                                <div className="flex w-[9%] items-center justify-center font-bold">
+                                    {team.nombre_points}
+                                </div>
+                                <div className="flex w-[7%] items-center justify-center text-sm">
+                                    {team.nombre_de_matchs}
+                                </div>
+                                <div className="flex w-[7%] items-center justify-center text-sm">
+                                    {team.nombre_de_victoires}
+                                </div>
+                                <div className="flex w-[7%] items-center justify-center text-sm">
+                                    {team.nombre_de_nuls}
+                                </div>
+                                <div className="flex w-[7%] items-center justify-center text-sm">
+                                    {team.nombre_de_defaites}
+                                </div>
+                                <div className="flex w-[7%] items-center justify-center text-sm">
                                     {team.difference_de_buts_libelle}
                                 </div>
                             </div>

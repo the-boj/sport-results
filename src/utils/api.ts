@@ -4,8 +4,10 @@ import { FootballFlux } from '../types/football/flux';
 import { formatDateToString } from '../utils/utils';
 import { BasketballLeaderboard } from '../types/basketball/leaderboard';
 import { BasketballPlayerStats } from '../types/basketball/playerStats';
-import { ChampionshipNames, FootballRankings } from '../types/football/rankings';
+import { FootballRankings } from '../types/football/rankings';
+import { ChampionshipNames } from '../types/slugs';
 import { PlayersStats } from '../types/football/player';
+import { CyclingLiveEvents } from 'src/types/cycling/live';
 
 const baseUrl = 'https://dwh.lequipe.fr/api/live/lives?date=--date--&platform=desktop&version=1.0';
 
@@ -90,4 +92,18 @@ export async function requestBasketballPlayerStats(path: string) {
     const res = await fetch(url);
 
     return res.json() as Promise<BasketballPlayerStats>;
+}
+
+/*****
+ * Cycling
+ */
+
+const cyclingRaceEventsUrl = `https://sdwh.lequipe.fr/iPhoneDatas/EFR/STD/ALL/V1/Cyclisme-sur-route/LiveComments/--ext--/--raceId--.json`;
+
+export async function requestCyclingLive(raceId: string) {
+    const ext = raceId.substring(raceId.length - 2);
+    const url = cyclingRaceEventsUrl.replace('--ext--', ext).replace('--raceId--', raceId);
+    const res = await fetch(url);
+
+    return res.json() as Promise<CyclingLiveEvents>;
 }

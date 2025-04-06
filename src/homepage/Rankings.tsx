@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { COMPETITION_TO_SLUG } from '../types/football/rankings';
+import { COMPETITION_TO_SLUG } from '../types/slugs';
 
 function Rankings() {
     const rankings = Object.keys(COMPETITION_TO_SLUG);

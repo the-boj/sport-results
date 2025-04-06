@@ -36,7 +36,7 @@ export interface Country {
     url_drapeau: string;
 }
 
-export type Sport = 'Basket' | 'Rugby' | 'Football' | 'Tennis';
+export type Sport = 'Basket' | 'Rugby' | 'Football' | 'Tennis' | 'Cyclisme sur route';
 
 /*****
  * Data API types
@@ -244,8 +244,7 @@ export interface FeedItemDFP {
 }
 
 export interface Instant {
-    __type: "instant"
-    date: string
-    libelle: string
-  }
-  
+    __type: 'instant';
+    date: string;
+    libelle: string;
+}

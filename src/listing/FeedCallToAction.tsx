@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Sport } from '../types/api';
-import { COMPETITION_TO_SLUG } from '../types/football/rankings';
+import { COMPETITION_TO_SLUG } from '../types/slugs';
 
 interface FeedCallToActionProps {
     sport: Sport;

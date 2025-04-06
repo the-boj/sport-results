@@ -7,7 +7,7 @@ export function Homepage() {
 
     return (
         <div className="flex flex-col w-full">
-            <div className="flex w-100 h-[50px]">
+            <div className="flex w-100 h-[40px]">
                 <button
                     onClick={() => setActiveTab('feed')}
                     className={`w-[50%] p-2 shadow transition-all ${
