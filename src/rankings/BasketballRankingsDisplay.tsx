@@ -6,7 +6,7 @@ interface Props {
 }
 
 function BasketballRankingsDisplay({ competition }: Props) {
-    if (competition === 'NBA') {
+    if (competition === 'nba') {
         return <NBARankingDisplay />;
     }
     return <BetclicEliteRankingDisplay />;
