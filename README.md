@@ -5,6 +5,10 @@ A PWA for sports results.
 No tracking, no ad, no data collection, no bloat.
 The source of the API is a website with way too much ads, and a bloated UI.
 
+Works both on mobile and desktop
+
+https://sports.scroped.com/
+
 ## Where does the data come from
 
 The data comes from a well-known sports website, originaly newspaper, called [L'Équipe](https://www.lequipe.fr/).
