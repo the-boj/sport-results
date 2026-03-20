@@ -24,7 +24,25 @@ We're not using the live results options that they have, because we don't want t
 
 It's a React app, with TailwindCSS, and build with Vite. Minimum dependencies.
 Components are mostly mirroring the API.
-Is hosted as static website on ...
+Is hosted as static website on S3 (`npm run deploy`) with CloudFront in front.
+
+### CloudFront + custom domain (e.g. sports.dealvault.fr)
+
+1. ACM: certificate in **us-east-1** for your hostname (required by CloudFront), DNS-validated.
+2. Run once (from repo root, with your real cert ARN):
+
+   ```bash
+   export ACM_CERTIFICATE_ARN='arn:aws:acm:us-east-1:YOUR_ACCOUNT:certificate/UUID'
+   npm run setup-cloudfront
+   ```
+
+   Defaults match `package.json` deploy: bucket `sports-results-578273199980-eu-west-3-an`, region `eu-west-3`, alias `sports.dealvault.fr`. Override with `S3_BUCKET`, `S3_BUCKET_REGION`, `CLOUDFRONT_DOMAIN` if needed.
+
+3. In DNS, point the hostname to the CloudFront domain name the script prints (CNAME, or Route 53 alias to the distribution).
+
+4. After each deploy, refresh CDN cache: `npm run invalidate-cloudfront`.
+
+State is stored in `scripts/.cloudfront-state.json` (gitignored). Delete that file only if you intentionally replace the distribution.
 
 ## Details
 

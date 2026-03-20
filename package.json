@@ -3,6 +3,9 @@
     "type-check": "npx tsc --noEmit -p ./tsconfig.app.json",
     "build": "vite build --outDir dist && workbox generateSW workbox-config.js && cp -r assets dist/ && cp -r manifest.json dist/manifest.json && cp -r robots.txt dist/robots.txt",
     "serve": "vite",
+    "deploy": "npm run build && aws s3 sync dist/ s3://sports-results-578273199980-eu-west-3-an/ --delete",
+    "setup-cloudfront": "bash scripts/setup-cloudfront.sh",
+    "invalidate-cloudfront": "bash scripts/invalidate-cloudfront.sh",
     "lint": ""
   },
   "dependencies": {
