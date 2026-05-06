@@ -7,7 +7,7 @@ The source of the API is a website with way too much ads, and a bloated UI.
 
 Works both on mobile and desktop
 
-https://sports.scroped.com/
+https://sports.dealvault.fr/
 
 ## Where does the data come from
 
